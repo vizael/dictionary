@@ -5,5 +5,22 @@
 <h1>My First Heading</h1>
 <p>My first paragraph.</p>
 
+<div id="fullDictionary">Loading dictionary...</div>
+<script>
+function loadDictionary(i) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      displayDictionary(this);
+    }
+  };
+  xmlhttp.open("GET", "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt", true);
+  xmlhttp.send();
+}
+
+function displayDictionary(fullDictionary) {
+  document.getElementById("fullDictionary").innerHTML =fullDictionary;
+}
+</script>
 </body>
 </html>
