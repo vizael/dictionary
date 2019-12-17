@@ -19,12 +19,12 @@
 <p>Dictionary:<p>
 <div id="fullDictionary">Loading dictionary...</div>
 <script>
-var permutations = [];
-var dictionary = [];
+var g_permutations = [];
+var g_dictionary = [];
 loadDictionary();
 displayBaseLetters();
 displayPermutations();
-displayValidWords(permutations, dictionary);
+displayValidWords(g_permutations, g_dictionary);
 
 function loadDictionary() {
   var xmlhttp = new XMLHttpRequest();
@@ -39,11 +39,11 @@ function loadDictionary() {
 
 function displayDictionary(fullDictionary) {
   console.log("Loading dictionary");
-  document.getElementById("fullDictionary").innerHTML = fullDictionary.responseText;
-  dictionary = fullDictionary.responseText.split(" ");
+  document.getElementById("fullDictionary").innerHTML = "Loaded dictionary.";
+  g_dictionary = fullDictionary.responseText.split(" "); //update global variable
 }
   
-function findGetParameter(parameterName) {
+function getParameter(parameterName) {
     var result = null,
         tmp = [];
     var items = location.search.substr(1).split("&");
@@ -51,22 +51,23 @@ function findGetParameter(parameterName) {
         tmp = items[index].split("=");
         if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
     }
+    console.log("Parameter " + parameterName + "=" + result);
     return result;
 }
   
 function displayBaseLetters() {
-  document.getElementById("baseLetters").innerHTML = findGetParameter("letters");
+  document.getElementById("baseLetters").innerHTML = getParameter("letters");
 }
 
 function displayPermutations() {
   console.log("Displaying permutations");
   var permutationsPretty = "";
-  permutations = permut(findGetParameter("letters"));
-  for (permutation of permutations) {
+  g_permutations = permut(getParameter("letters")); //update global variable
+  for (permutation of g_permutations) {
      //console.log(permutation);
      permutationsPretty = permutationsPretty + permutation + "<br>";
   }
-  document.getElementById("permutations").innerHTML = displayPermutations;
+  document.getElementById("permutations").innerHTML = permutationsPretty;
 }
   
 function permut(string) {
