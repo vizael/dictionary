@@ -10,14 +10,21 @@
   <input type="submit" value="Submit">
 </form> 
 
+<p>Base letters:</p>
 <div id="baseLetters">Base letters...</div>
-<div id="premutations">Calculating premutations...</div>
+<p>Permutations:</p>
+<div id="permutations">Calculating premutations...</div>
+<p>Valid words:</p>
+<div id="validWords">Validating words...</div>
+<p>Dictionary:<p>
 <div id="fullDictionary">Loading dictionary...</div>
 <script>
 var permutations = [];
+var dictionary = [];
 loadDictionary();
 displayBaseLetters();
 displayPermutations();
+displayValidWords(permutations, dictionary);
 
 function loadDictionary() {
   var xmlhttp = new XMLHttpRequest();
@@ -31,7 +38,9 @@ function loadDictionary() {
 }
 
 function displayDictionary(fullDictionary) {
+  console.log("Loading dictionary");
   document.getElementById("fullDictionary").innerHTML = fullDictionary.responseText;
+  dictionary = fullDictionary.responseText.split(" ");
 }
   
 function findGetParameter(parameterName) {
@@ -50,16 +59,18 @@ function displayBaseLetters() {
 }
 
 function displayPermutations() {
+  console.log("Displaying permutations");
   var permutationsPretty = "";
   permutations = permut(findGetParameter("letters"));
   for (permutation of permutations) {
-     console.log(permutation);
+     //console.log(permutation);
      permutationsPretty = permutationsPretty + permutation + "<br>";
   }
   document.getElementById("permutations").innerHTML = displayPermutations;
 }
   
 function permut(string) {
+  console.log("Calculating permutations");
   if (string.length < 2) return string; // This is our break condition
   var permutations = []; // This array will hold our permutations
   for (var i = 0; i < string.length; i++) {
@@ -72,6 +83,18 @@ function permut(string) {
       permutations.push(char + subPermutation)
   }
   return permutations;
+}
+  
+function displayValidWords(permutations, dictionary){
+  console.log("Displaying valid words");
+  var wordsPretty = "";
+    for (permutation of permutations) {
+      if (dictionary.includes(permutation)){
+         console.log(permutation);
+         wordsPretty = wordsPretty + permutation + "<br>";
+      }
+  }
+  document.getElementById("validWords").innerHTML = wordsPretty;
 }
 </script>
 </body>
