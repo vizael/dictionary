@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="/dictionary/assets/css/style.css?v=1c053375f5191e00a09e15e602fe47a39c2aa223">
-</head>
+---
+layout: minimal
+---
 <body>
 <h1>Crossword solver</h1>
 <p>Find all possible valid words.</p>
@@ -18,7 +16,7 @@
 <span id="permutations">Calculating premutations...</span>
 <h2>Valid words:</h2>
 <span id="validWords">Validating words...</span>
-<h2>Dictionary:<h2>
+<h2>Dictionary:</h2>
 <span id="fullDictionary">Loading dictionary...</span>
 <script>
 var g_permutations = [];
@@ -103,4 +101,3 @@ function displayValidWords(permutations, dictionary){
 }
 </script>
 </body>
-<html>
