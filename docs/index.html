@@ -39,7 +39,7 @@ function loadDictionary() {
 }
 
 function displayDictionary(fullDictionary) {
-  g_dictionary = fullDictionary.responseText.split("/n"); //update global variable
+  g_dictionary = fullDictionary.responseText.split("\n"); //update global variable
   console.log("Dictionary size - " + g_dictionary.length);
   document.getElementById("fullDictionary").innerHTML = "Loaded dictionary of " + g_dictionary.length + " words.";
 }
