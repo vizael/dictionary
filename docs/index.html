@@ -39,7 +39,7 @@ function loadDictionary() {
 }
 
 function displayDictionary(fullDictionary) {
-  g_dictionary = fullDictionary.responseText.split(" "); //update global variable
+  g_dictionary = fullDictionary.responseText.split("/n"); //update global variable
   console.log("Dictionary size - " + g_dictionary.length);
   document.getElementById("fullDictionary").innerHTML = "Loaded dictionary of " + g_dictionary.length + " words.";
 }
@@ -62,13 +62,13 @@ function displayBaseLetters() {
 
 function displayPermutations() {
   console.log("Displaying permutations");
-  var permutationsPretty = "";
+  //var permutationsPretty = "";
   g_permutations = permut(getParameter("letters")); //update global variable
-  for (permutation of g_permutations) {
+  //for (permutation of g_permutations) {
      //console.log(permutation);
-     permutationsPretty = permutationsPretty + permutation + "<br>";
-  }
-  document.getElementById("permutations").innerHTML = permutationsPretty;
+  //   permutationsPretty = permutationsPretty + permutation + "<br>";
+  //}
+  document.getElementById("permutations").innerHTML = "Generated " + g_permutations.length + " permutations.";
 }
   
 function permut(string) {
