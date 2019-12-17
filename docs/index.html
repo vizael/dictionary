@@ -11,10 +11,13 @@
 </form> 
 
 <div id="baseLetters">Base letters...</div>
+<div id="premutations">Calculating premutations...</div>
 <div id="fullDictionary">Loading dictionary...</div>
 <script>
+var permutations = [];
 loadDictionary();
 displayBaseLetters();
+calculatePermutations();
 
 function loadDictionary() {
   var xmlhttp = new XMLHttpRequest();
@@ -44,6 +47,32 @@ function findGetParameter(parameterName) {
   
 function displayBaseLetters() {
   document.getElementById("baseLetters").innerHTML = findGetParameter("letters");
+}
+
+function displayPermutations() {
+  permutations = permut(findGetParameter("letters"));
+  for (permutation of permutations)
+     displayPermutations = permutation + "<br>"
+  document.getElementById("permutations").innerHTML = displayPermutations;
+}
+  
+function permut(string) {
+  if (string.length < 2) return string; // This is our break condition
+
+  var permutations = []; // This array will hold our permutations
+  for (var i = 0; i < string.length; i++) {
+    var char = string[i];
+
+    // Cause we don't want any duplicates:
+    if (string.indexOf(char) != i) // if char was used already
+      continue; // skip it this time
+
+    var remainingString = string.slice(0, i) + string.slice(i + 1, string.length); //Note: you can concat Strings via '+' in JS
+
+    for (var subPermutation of permut(remainingString))
+      permutations.push(char + subPermutation)
+  }
+  return permutations;
 }
 </script>
 </body>
