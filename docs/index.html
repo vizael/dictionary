@@ -6,7 +6,7 @@
 <p>Find all possible valid words.</p>
 <form action="/dictionary">
   Enter 6 letters:<br>
-  <input type="text" name="letters" value="abcdef">
+  <input type="text" id="lettersInput" name="letters" value="abcdef">
   <input type="submit" value="Submit">
 </form> 
 
@@ -58,6 +58,7 @@ function getParameter(parameterName) {
   
 function displayBaseLetters() {
   document.getElementById("baseLetters").innerHTML = getParameter("letters");
+  document.getElementById("lettersInput").value = getParameter("letters");
 }
 
 function displayPermutations() {
