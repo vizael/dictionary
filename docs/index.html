@@ -24,13 +24,14 @@ var g_dictionary = [];
 loadDictionary();
 displayBaseLetters();
 displayPermutations();
-displayValidWords(g_permutations, g_dictionary);
 
 function loadDictionary() {
+  console.log("Loading dictionary");
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       displayDictionary(this);
+      displayValidWords(g_permutations, g_dictionary);
     }
   };
   xmlhttp.open("GET", "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt", true);
@@ -38,9 +39,9 @@ function loadDictionary() {
 }
 
 function displayDictionary(fullDictionary) {
-  console.log("Loading dictionary");
-  document.getElementById("fullDictionary").innerHTML = "Loaded dictionary.";
   g_dictionary = fullDictionary.responseText.split(" "); //update global variable
+  console.log("Dictionary size - " + g_dictionary.length);
+  document.getElementById("fullDictionary").innerHTML = "Loaded dictionary of " + g_dictionary.length + " words.";
 }
   
 function getParameter(parameterName) {
