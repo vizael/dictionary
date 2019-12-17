@@ -20,28 +20,35 @@ layout: minimal
 <span id="fullDictionary">Loading dictionary...</span>
 <script>
 var g_permutations = [];
-var g_dictionary = [];
-loadDictionary();
+  
 displayBaseLetters();
 displayPermutations();
+  
+if (localStorage.getItem("dictionary") === null){
+  	loadDictionaryFromFile();
+} else {
+    displayValidWords(g_permutations, localStorage.getItem("dictionary"));
+}
 
-function loadDictionary() {
+function loadDictionaryFromFile() {
   console.log("Loading dictionary");
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      displayDictionary(this);
-      displayValidWords(g_permutations, g_dictionary);
+      saveDictionary(this);
+      displayValidWords(g_permutations, localStorage.getItem("dictionary"));
     }
   };
-  xmlhttp.open("GET", "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt", true);
+  xmlhttp.open("GET", "https://raw.githubusercontent.com/vizael/dictionary/master/docs/words.txt", true);
   xmlhttp.send();
 }
 
-function displayDictionary(fullDictionary) {
-  g_dictionary = fullDictionary.responseText.split("\n"); //update global variable
-  console.log("Dictionary size - " + g_dictionary.length);
-  document.getElementById("fullDictionary").innerHTML = "Loaded dictionary of " + g_dictionary.length + " words.";
+function saveDictionary(fullDictionary) {
+  var dictionary = fullDictionary.responseText.split("\n"); //update global variable
+  localStorage.setItem("dictionary", dictionary);
+  console.log("Dictionary size - " + dictionary.length);
+  console.log("Saved dictionary to local storage.");
+  document.getElementById("fullDictionary").innerHTML = "Loaded dictionary of " + dictionary.length + " words.";
 }
   
 function getParameter(parameterName) {
