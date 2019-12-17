@@ -60,13 +60,13 @@ function getParameter(parameterName) {
   
 function displayBaseLetters() {
   //document.getElementById("baseLetters").innerHTML = getParameter("letters");
-  document.getElementById("lettersInput").value = getParameter("letters");
+  document.getElementById("lettersInput").value = getParameter("letters").toLowerCase();
 }
 
 function displayPermutations() {
   console.log("Displaying permutations");
   //var permutationsPretty = "";
-  g_permutations = permut(getParameter("letters")); //update global variable
+  g_permutations = permut(getParameter("letters").toLowerCase()); //update global variable
   //for (permutation of g_permutations) {
      //console.log(permutation);
   //   permutationsPretty = permutationsPretty + permutation + "<br>";
