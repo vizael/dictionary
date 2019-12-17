@@ -12,14 +12,14 @@
   <input type="submit" value="Submit">
 </form> 
 
-<p>Base letters:</p>
-<div id="baseLetters">Base letters...</div>
-<p>Permutations:</p>
-<div id="permutations">Calculating premutations...</div>
-<p>Valid words:</p>
-<div id="validWords">Validating words...</div>
-<p>Dictionary:<p>
-<div id="fullDictionary">Loading dictionary...</div>
+<!--<p>Base letters:</p>
+<div id="baseLetters">Base letters...</div>-->
+<h2>Permutations:</h2>
+<span id="permutations">Calculating premutations...</span>
+<h2>Valid words:</h2>
+<span id="validWords">Validating words...</span>
+<h2>Dictionary:<h2>
+<span id="fullDictionary">Loading dictionary...</span>
 <script>
 var g_permutations = [];
 var g_dictionary = [];
@@ -59,7 +59,7 @@ function getParameter(parameterName) {
 }
   
 function displayBaseLetters() {
-  document.getElementById("baseLetters").innerHTML = getParameter("letters");
+  //document.getElementById("baseLetters").innerHTML = getParameter("letters");
   document.getElementById("lettersInput").value = getParameter("letters");
 }
 
