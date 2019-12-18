@@ -24,11 +24,11 @@ var g_permutations = [];
 displayBaseLetters();
 displayPermutations();
   
-if (localStorage.getItem("dictionary") === null){
+if (sessionStorage.getItem("dictionary") === null){
   	loadDictionaryFromFile();
 } else {
-    document.getElementById("fullDictionary").innerHTML = "Local dictionary of " + JSON.parse(localStorage.getItem("dictionary")).length + " words.";
-    displayValidWords(g_permutations, JSON.parse(localStorage.getItem("dictionary")));
+    document.getElementById("fullDictionary").innerHTML = "Local dictionary of " + JSON.parse(sessionStorage.getItem("dictionary")).length + " words.";
+    displayValidWords(g_permutations, JSON.parse(sessionStorage.getItem("dictionary")));
 }
 
 function loadDictionaryFromFile() {
@@ -37,7 +37,7 @@ function loadDictionaryFromFile() {
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       saveDictionary(this);
-      displayValidWords(g_permutations, JSON.parse(localStorage.getItem("dictionary")));
+      displayValidWords(g_permutations, JSON.parse(sessionStorage.getItem("dictionary")));
     }
   };
   xmlhttp.open("GET", "https://raw.githubusercontent.com/vizael/dictionary/master/docs/words.txt", true);
@@ -46,7 +46,7 @@ function loadDictionaryFromFile() {
 
 function saveDictionary(fullDictionary) {
   var dictionary = fullDictionary.responseText.split("\n"); //update global variable
-  localStorage.setItem("dictionary", JSON.stringify(dictionary));
+  sessionStorage.setItem("dictionary", JSON.stringify(dictionary));
   console.log("Dictionary size - " + dictionary.length);
   console.log("Saved dictionary to local storage.");
   document.getElementById("fullDictionary").innerHTML = "Loaded dictionary of " + dictionary.length + " words.";
